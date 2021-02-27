@@ -29,9 +29,9 @@ const Cart = (props) => {
             <h3>Order Summery</h3>
             <p>Items ordered: {cart.length}</p>
             <p>Product price: {roundNumber(total)}</p>
-            <p><small>Shipping cost: {shipping}</small></p>
             <p>Tax and VAT: {tax}</p>
-            <p><small>Total: {total + shipping + tax}</small></p>
+            <p><small>Shipping cost: {shipping}</small></p>
+            <p><b>Total: {total + shipping + tax}</b></p>
         </div>
     );
 };
