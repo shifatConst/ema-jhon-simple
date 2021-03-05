@@ -16,6 +16,7 @@ nav a{
     padding: 5px;
 }
 nav a:hover{
+    text-decoration: none;
     background-color:white;
     color: black;
 }
