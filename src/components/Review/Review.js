@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import fakeData from '../../fakeData';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
@@ -9,15 +9,15 @@ import happyImage from '../../images/giphy.gif'
 const Review = () => {
     const [cart, setCart] = useState([]);
     const [placeOrder, setPlaceOrder] = useState(false);
+    const history = useHistory();
+    const handleCheckout = () => {
+        history.push('/shipment');
+    }
+
     const removeCart = (productKey) => {
         const newCart = cart.filter(pd => pd.key !== productKey);
         setCart(newCart);
         removeFromDatabaseCart(productKey);
-    }
-    const handlePlaceOrder = () => {
-        setCart([]);
-        setPlaceOrder(true);
-        processOrder();
     }
     let thankYou;
     if(placeOrder){
@@ -48,7 +48,7 @@ const Review = () => {
             </div>
             <div>
                 <Cart cart={cart}>
-                    <button onClick={handlePlaceOrder}>Place Order</button>
+                    <button onClick={handleCheckout}>Proceed Checkout</button>
                 </Cart>
             </div>
         </div>
