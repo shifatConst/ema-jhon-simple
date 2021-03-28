@@ -1,9 +1,26 @@
 import React from 'react';
+import fakeData from '../../fakeData'
 
 const Manage = () => {
+    const handleAddProduct = () => {
+        const product = {};
+        fetch('https://obscure-mountain-57384.herokuapp.com/addProduct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+    }
     return (
         <div>
-            <h1>This is manage section</h1>
+            <form action="">
+                <p><span>Name: </span><input type="text"/></p>
+                <p><span>Price: </span><input type="text"/></p>
+                <p><span>Quantity: </span><input type="text"/></p>
+                <p><span>Upload Image</span><input type="file"/></p>
+                <button onClick={handleAddProduct}>Add Product</button>
+            </form>
         </div>
     );
 };
