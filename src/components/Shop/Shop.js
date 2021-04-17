@@ -10,12 +10,13 @@ const Shop = () => {
 
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
-        fetch('https://obscure-mountain-57384.herokuapp.com/products')
+        fetch('https://obscure-mountain-57384.herokuapp.com/products?search='+search)
             .then(res => res.json())
             .then(data => setProducts(data))
-    }, [])
+    }, [search])
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
@@ -29,6 +30,11 @@ const Shop = () => {
         .then(res => res.json())
         .then(data => setCart(data))
     }, [])
+
+    const handleSearch = e => {
+        setSearch(e.target.value);
+    };
+
     const handleAddItems = (product) => {
         const toBeAddedKey = product.key;
         const sameProduct = cart.find(pd => pd.key === toBeAddedKey);
@@ -50,6 +56,7 @@ const Shop = () => {
     return (
         <div className='twin-container'>
             <div className="products-container">
+                <input type="text" onBlur={handleSearch} className="product-search" placeholder="search product"/>
                 {
                     products.map(product =>
                         <Products
